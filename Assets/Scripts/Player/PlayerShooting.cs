@@ -17,6 +17,9 @@ public class PlayerShooting : MonoBehaviour
     Light gunLight;
     float effectsDisplayTime = 0.2f;
 
+    Animator anim;
+    bool shooting = false;
+
 
     void Awake ()
     {
@@ -25,6 +28,7 @@ public class PlayerShooting : MonoBehaviour
         gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
+        
     }
 
 
@@ -35,7 +39,9 @@ public class PlayerShooting : MonoBehaviour
 		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             Shoot ();
+           
         }
+        
 
         if(timer >= timeBetweenBullets * effectsDisplayTime)
         {
@@ -67,8 +73,10 @@ public class PlayerShooting : MonoBehaviour
 
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
+        
+        
 
-        if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
+        if (Physics.Raycast (shootRay, out shootHit, range, shootableMask))
         {
             EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
             if(enemyHealth != null)

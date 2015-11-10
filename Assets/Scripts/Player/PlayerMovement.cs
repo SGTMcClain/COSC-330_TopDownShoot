@@ -17,6 +17,18 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
+    void Update()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            anim.SetBool("IsShooting", true);
+        }
+        else
+        {
+            anim.SetBool("IsShooting", false);
+        }
+    }
+
     void FixedUpdate()
     {
         float h = Input.GetAxisRaw("Horizontal");
